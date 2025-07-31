@@ -1,6 +1,6 @@
 import  { useEffect, useState } from "react";
 import Step1PersonalInfo from "./step1PersonalInfo";
-import Tabs from "../Tabs";
+import Tabs from "./Tabs";
 import Step2AccountSetup from "./step2AccountSetup";
 
 export type formData={
