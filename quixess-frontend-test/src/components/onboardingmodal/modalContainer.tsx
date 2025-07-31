@@ -2,15 +2,10 @@ import  { useEffect, useState } from "react";
 import Step1PersonalInfo from "./step1PersonalInfo";
 import Tabs from "./Tabs";
 import Step2AccountSetup from "./step2AccountSetup";
+import Step3Preferences from "./step3Preferences";
+import type { formData } from "../../types/formData";
 
-export type formData={
-    fullName: string,
-    email: string
-    username: string,
-    password: string,
-    theme: string,
-    subscribe: boolean,
-  }
+
 
 export default function ModalContainer({ onClose }: { onClose: () => void }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -65,7 +60,7 @@ export default function ModalContainer({ onClose }: { onClose: () => void }) {
         formData.password.trim().length >= 6
       );
     }
-    return true; // Step 3 no required validation
+    return true; 
   };
 
   return (
@@ -74,14 +69,14 @@ export default function ModalContainer({ onClose }: { onClose: () => void }) {
         transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
       <div
-        className={`bg-white rounded-lg shadow-lg w-full md:w-[700px] p-6 relative 
+        className={` bg-white rounded-lg shadow-lg w-full md:w-[700px] p-6 relative 
           transform transition-transform duration-300 ease-out
           ${isVisible ? "scale-100" : "scale-95"}`}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
         >
           ✕
         </button>
@@ -104,7 +99,7 @@ export default function ModalContainer({ onClose }: { onClose: () => void }) {
             
           )}
           {currentStep === 3 && (
-            'three'
+               <Step3Preferences formData={formData} setFormData={setFormData} />
            
           )}
         </div>
@@ -123,7 +118,7 @@ export default function ModalContainer({ onClose }: { onClose: () => void }) {
             <button
               onClick={handleNext}
               disabled={!isStepValid()}
-              className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+              className="px-4 py-2 bg-blue-800 text-white rounded disabled:opacity-50"
             >
               Next
             </button>

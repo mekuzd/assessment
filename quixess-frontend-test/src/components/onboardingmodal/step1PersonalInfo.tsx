@@ -1,12 +1,9 @@
-import React  from "react";
-import type { formData } from "./modalContainer";
+
 import Input from "../input";
+import type { StepsProps } from "../../types/stepsProps";
 
 
-export type StepsProps = {
-    formData:formData
-    setFormData: React.Dispatch<React.SetStateAction<formData>>;
-}
+
 
 export default function Step1PersonalInfo({ formData, setFormData }: StepsProps) {
   return (

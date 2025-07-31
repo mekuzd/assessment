@@ -12,7 +12,7 @@ export default function Tabs({ steps, currentStep }: TabsProps) {
           <div
             key={step}
             className={`flex-1 text-center text-sm py-2 border-b-4 ${
-              isActive ? "border-blue-300 font-bold" : "border-gray-300"
+              isActive ? "border-blue-800 font-bold" : "border-gray-300"
             }`}
           >
             {step}

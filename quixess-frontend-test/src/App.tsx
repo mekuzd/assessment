@@ -9,7 +9,7 @@ function App() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <button
         onClick={() => setIsModalOpen(true)}
-        className="px-6 py-3 bg-grey-500 text-grey-100 rounded-lg shadow-md hover:text-white hover:bg-blue-400 transition"
+        className="px-6 py-3 bg-grey-500 text-grey-100 rounded-lg shadow-md hover:text-white hover:bg-blue-800 transition"
       >
         Open Onboarding Modal
       </button>
