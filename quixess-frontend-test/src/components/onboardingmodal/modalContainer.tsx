@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import  { useEffect, useState } from "react";
+import Step1PersonalInfo from "./step1PersonalInfo";
+import Tabs from "../Tabs";
+import Step2AccountSetup from "./step2AccountSetup";
 
+export type formData={
+    fullName: string,
+    email: string
+    username: string,
+    password: string,
+    theme: string,
+    subscribe: boolean,
+  }
 
-export default function ModalContainer() {
+export default function ModalContainer({ onClose }: { onClose: () => void }) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
+    const steps = ["Personal Info", "Account Setup", "Preferences"];
+  const [formData, setFormData] = useState<formData>({
     fullName: "",
     email: "",
     username: "",
@@ -12,7 +24,15 @@ export default function ModalContainer() {
     subscribe: false,
   });
 
-  const steps = ["Personal Info", "Account Setup", "Preferences"];
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+
+  useEffect(() => {
+    // Trigger the animation after mounting
+    setTimeout(() => setIsVisible(true), 10);
+  }, []);
+
+
 
   const handleNext = () => {
     if (currentStep < steps.length) {
@@ -49,19 +69,38 @@ export default function ModalContainer() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
-   {/* tabs  */}
+  <div
+      className={`fixed inset-0 flex items-center justify-center bg-black/50 z-50  p-3
+        transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+    >
+      <div
+        className={`bg-white rounded-lg shadow-lg w-full md:w-[700px] p-6 relative 
+          transform transition-transform duration-300 ease-out
+          ${isVisible ? "scale-100" : "scale-95"}`}
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        >
+          ✕
+        </button>
+ 
+<div 
+ className={` my-4`}
+>
+      {/* tabs  */}
 
+       <Tabs steps={steps} currentStep={currentStep} />
 
         {/* Step Components */}
         <div className="mt-4">
           {currentStep === 1 && (
-            'one'
+       <Step1PersonalInfo formData={formData} setFormData={setFormData} />
 
           )}
           {currentStep === 2 && (
-            'two'
+           <Step2AccountSetup formData={formData} setFormData={setFormData} />
             
           )}
           {currentStep === 3 && (
@@ -71,7 +110,7 @@ export default function ModalContainer() {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between mt-6">
+        <div className="flex justify-between mt-[40px]">
           <button
             onClick={handleBack}
             disabled={currentStep === 1}
@@ -97,6 +136,8 @@ export default function ModalContainer() {
             </button>
           )}
         </div>
+</div>
+
       </div>
     </div>
   );
