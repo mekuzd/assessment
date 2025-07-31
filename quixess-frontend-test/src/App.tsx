@@ -1,11 +1,10 @@
-
-import './App.css'
+// import './App.css'
+import ModalContainer from './components/onboardingmodal/modalContainer'
 import './index.css'
 function App() {
-
   return (
- <div className="text-4xl text-red-500 text-center mt-10">
-      Tailwind is working!
+    <div >
+      <ModalContainer/>
     </div>
   )
 }
