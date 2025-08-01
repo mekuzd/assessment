@@ -5,7 +5,7 @@ type TabsProps = {
 
 export default function Tabs({ steps, currentStep }: TabsProps) {
   return (
-    <div className="flex justify-between mb-4">
+    <div className="flex justify-between mt-[30px]">
       {steps.map((step:string, index:number) => {
         const isActive = currentStep === index + 1;
         return (

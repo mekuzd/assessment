@@ -25,7 +25,7 @@ export default function Input({
     <input
       type={type}
       placeholder={placeholder}
-      className={`border rounded p-2 w-full text-sm outline-none focus:border-blue-800  ${className}`}
+      className={`border rounded p-2  text-sm outline-none focus:border-blue-800  ${className ? className : "w-full"}`}
       checked={checked}
      {...register(name)}   
     />

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import type { StepsProps } from "../../types/stepsProps";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { preferencesSchema } from "../../validation/validationSchema";
+import Input from "../input";
 
 export default function Step3Preferences({
   formData,
@@ -33,7 +34,7 @@ export default function Step3Preferences({
       
       <select
         {...register("theme")}
-        className="border rounded p-2 w-full"
+        className="border rounded p-2 w-full outline-none focus:border-blue-800 "
       >
         <option value="Light">Light</option>
         <option value="Dark">Dark</option>
@@ -42,19 +43,18 @@ export default function Step3Preferences({
         <p className="text-red-500 mt-1 text-sm">{errors.theme.message}</p>
       )}
 
-      {/* Newsletter Checkbox */}
+     
       <label className="flex items-center space-x-2">
-        <input
+        <Input
           type="checkbox"
-          {...register("subscribe")}
+          name="subscribe"
+          register={register}
+          errors={errors}
           className="h-4 w-4"
         />
-        <span>Subscribe to newsletter?</span>
+        <span className="mb-1">Subscribe to newsletter?</span>
       </label>
-      {errors.subscribe && (
-        <p className="text-red-500 mt-1 text-sm">{errors.subscribe.message}</p>
-      )}
-
+     
       <div className="flex justify-between mt-6">
         <button
           type="button"
