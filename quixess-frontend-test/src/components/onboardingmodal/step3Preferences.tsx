@@ -1,32 +1,75 @@
+import { useForm } from "react-hook-form";
 import type { StepsProps } from "../../types/stepsProps";
-import Input from "../input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { preferencesSchema } from "../../validation/validationSchema";
 
+export default function Step3Preferences({
+  formData,
+  setFormData,
+  onBack,
+}: StepsProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(preferencesSchema),
+    defaultValues: {
+      theme: formData.theme || "Light",
+      subscribe: formData.subscribe,
+    },
+  });
 
-export default function Step3Preferences({ formData, setFormData }: StepsProps) {
+  const onSubmit = (data: any) => {
+    setFormData(data);
+    
+  };
+
   return (
-    <div className="my-[40px] flex flex-col gap-[20px]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="my-[40px] flex flex-col gap-[20px]"
+    >
+      
       <select
-        value={formData.theme}
-        onChange={(e) =>
-          setFormData({ ...formData, theme: e.target.value })
-        }
+        {...register("theme")}
         className="border rounded p-2 w-full"
       >
-        <option>Light</option>
-        <option>Dark</option>
+        <option value="Light">Light</option>
+        <option value="Dark">Dark</option>
       </select>
+      {errors.theme && (
+        <p className="text-red-500 mt-1 text-sm">{errors.theme.message}</p>
+      )}
 
+      {/* Newsletter Checkbox */}
       <label className="flex items-center space-x-2">
-        <Input
+        <input
           type="checkbox"
-          checked={formData.subscribe}
-          onChange={(e) =>
-            setFormData({ ...formData, subscribe: e.target.checked })
-          }
+          {...register("subscribe")}
           className="h-4 w-4"
         />
         <span>Subscribe to newsletter?</span>
       </label>
-    </div>
+      {errors.subscribe && (
+        <p className="text-red-500 mt-1 text-sm">{errors.subscribe.message}</p>
+      )}
+
+      <div className="flex justify-between mt-6">
+        <button
+          type="button"
+          onClick={onBack}
+          className="px-4 py-2 bg-gray-300 rounded"
+        >
+          Back
+        </button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-green-600 text-white rounded"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
   );
 }

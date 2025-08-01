@@ -1,29 +1,36 @@
+
 import React from "react";
 
 type InputProps = {
   type: string; 
   placeholder?: string;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 className?: string; 
 checked?: boolean;
+register?: any; 
+  errors?: any; 
+  name:string
 };
 
 export default function Input({
   type = "text",
   placeholder = "",
-  value,
-  onChange,
-  className = "",checked
+  className = "",
+  checked,
+  register,
+  errors,
+  name
 }: InputProps) {
   return (
+ <div>
+ 
     <input
       type={type}
       placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className={`border rounded p-2 w-full text-sm outline-none focus:border-blue-800 ${className}`}
+      className={`border rounded p-2 w-full text-sm outline-none focus:border-blue-800  ${className}`}
       checked={checked}
+     {...register(name)}   
     />
+     {errors[name] && <p className="text-red-500 mt-1 text-sm">{errors[name].message}</p>}</div>
   );
 }

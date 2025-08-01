@@ -1,7 +1,10 @@
-import type { formData } from "./formData";
+import type { formData } from "../../store/onBoardingSlice";
+
 
 
 export type StepsProps = {
-    formData:formData
+    formData:formData;
+    onValidNext?: () => void;
     setFormData: React.Dispatch<React.SetStateAction<formData>>;
+    onBack?: () => void;
 }
